@@ -51,7 +51,7 @@ void setup() {
 	digitalWrite(ledPin, 0);
 
 	pinMode(relayPin, OUTPUT);
-	pinMode(buttonPin, INPUT);
+	pinMode(buttonPin, INPUT);  
 }
 
 EggTimer sec(1000 * 60);
@@ -85,7 +85,8 @@ void loop() {
 #ifdef UBUNTU
 class ESP32sim_setup : public ESP32sim_Module {
   void setup() override {
-      bm.addPress(buttonPin, 10, 1, true); 
+      bm.addPress(buttonPin, 10, 1, true);
+      Serial.scheduleInput(2000, "set setTemp=5.0\n"); 
   };
 } csim; 
 #endif
