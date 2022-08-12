@@ -56,21 +56,27 @@ void setup() {
 
 EggTimer sec(1000 * 60);
 
-int power = 1;
+int power = 0, minutesOff = 0;
 void loop() {
   j.run();
 
   if (sec.tick())  {
-    float temp = tempSense.readTemp();
-    OUT("setTemp %.2f temp %.2f power %d", (float)setTemp, temp, power);
+    float temp = tempSense.readTemp(10);
 
     if (temp > (setTemp + setHist)) { 
       power = 1;
     }
-    if (temp < setTemp) { 
+    if (temp > -100 && temp < setTemp) { 
       power = 0;
     }
+    //if (power == 0 && ++minutesOff > 20) { 
+    //  power = 1;
+    //}
+    if (power == 1) {
+      minutesOff = 0;
+    }
 
+    OUT("setTemp %.2f temp %.2f power %d minutesOff %d", (float)setTemp, temp, power, minutesOff);
     digitalWrite(relayPin, power);
     digitalWrite(ledPin, !power);
 	}
