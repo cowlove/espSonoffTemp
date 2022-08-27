@@ -40,7 +40,7 @@ WiFiUDP udp;
 
 JStuff j;
 
-CLI_VARIABLE_FLOAT(setTemp, 10);
+CLI_VARIABLE_FLOAT(setTemp, 8); 
 CLI_VARIABLE_FLOAT(setHist, 0.2);
 
 TempSensor tempSense(&ow);
